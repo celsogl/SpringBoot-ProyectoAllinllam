@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootProyectoAllinllamApplication<spring-boot-ProyectoAllinllam>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.clases.springboot.app.SpringBootProyectoAllinllamApplication",
+            "projectName": "spring-boot-ProyectoAllinllam",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
