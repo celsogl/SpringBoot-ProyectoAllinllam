@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,10 @@ import com.clases.springboot.app.Models.Service.IUsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin("*")
 public class UsuarioController {
     
+
     @Autowired
     private IUsuarioService usuarioService;
 
@@ -41,6 +44,8 @@ public class UsuarioController {
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(rol);
+        roles.add(usuarioRol);
+
 
         return usuarioService.guardarUsuario(usuario, roles);
     }
