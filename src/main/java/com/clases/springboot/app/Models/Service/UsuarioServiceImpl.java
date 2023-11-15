@@ -60,10 +60,18 @@ public class UsuarioServiceImpl implements IUsuarioService {
         return usuarioDao.findById(id);
     }
 
+    
     @Override
     @Transactional(readOnly = true)
     public Usuario findByUsername(String username) {
         return usuarioDao.findByUsuario(username);
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+       usuarioDao.deleteById(id);
     }
 
 

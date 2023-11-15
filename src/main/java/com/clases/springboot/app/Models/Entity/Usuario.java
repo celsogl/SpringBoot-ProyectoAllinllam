@@ -28,8 +28,8 @@ public class Usuario {
     @Column(name = "usuario", length = 255)
     private String usuario;
 
-    @Column(name = "contraseña", length = 255)
-    private String contraseña;
+    @Column(name = "pass", length = 255)
+    private String pass;
 
     @Column(name = "FechaRegistro")
     private Date fecharegistro;
@@ -54,13 +54,7 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
+    
 
     public Date getFecharegistro() {
         return fecharegistro;
@@ -81,5 +75,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+ 
 }

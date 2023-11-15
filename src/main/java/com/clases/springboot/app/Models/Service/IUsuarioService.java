@@ -13,7 +13,7 @@ public interface IUsuarioService {
 
     public List<Usuario> findAll();
 
-   // public void deleteById(Long id);
+    public void deleteById(Long id);
 
 	Optional<Usuario> findById(Long id);
 
