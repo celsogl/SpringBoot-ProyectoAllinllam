@@ -8,7 +8,5 @@ import java.util.Optional;
 
 public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
     
-    public Usuario findByUsuario(String user);
-
-    Optional<Usuario> findByusuario(String usuario);
+    Optional<Usuario> findByUsername(String username);
 }

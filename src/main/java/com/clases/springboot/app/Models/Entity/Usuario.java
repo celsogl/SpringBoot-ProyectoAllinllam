@@ -1,86 +1,81 @@
 package com.clases.springboot.app.Models.Entity;
 
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "usuario", uniqueConstraints = {@UniqueConstraint(columnNames={"username"})})
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
+    @Column(nullable = false)
+    String username;
+    String pass;
+    Date fecharegistro;
+    @Enumerated(EnumType.STRING)
+    Role role;
 
-    @Column(name = "usuario", length = 255)
-    private String usuario;
-
-    @Column(name = "pass", length = 255)
-    private String pass;
-
-    @Column(name = "FechaRegistro")
-    private Date fecharegistro;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
-    @JsonIgnore
-    private Set<UsuarioRol> usuarioRoles = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
 
     
-
-    public Date getFecharegistro() {
-        return fecharegistro;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setFecharegistro(Date fecharegistro) {
-        this.fecharegistro = fecharegistro;
+  
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public Set<UsuarioRol> getUsuarioRoles() {
-        return usuarioRoles;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
-        this.usuarioRoles = usuarioRoles;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public Usuario() {
+    @Override
+    public boolean isEnabled() {
+       return true;
     }
 
-    public String getPass() {
-        return pass;
+
+    @Override
+    public String getPassword() {
+      return pass;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
- 
+
+
 }
