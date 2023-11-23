@@ -28,8 +28,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public JwtResponse login(JwtRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsuario(), request.getPass()));
-        UserDetails user = usuarioDao.findByUsername(request.getUsuario()).orElseThrow();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPass()));
+        UserDetails user = usuarioDao.findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.getToken(user);
         return JwtResponse.builder().token(token).build();
     }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JwtRequest {
     
-    String usuario;
+    String username;
     String pass;
     
     
